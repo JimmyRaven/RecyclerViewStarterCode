@@ -8,6 +8,7 @@ import android.os.Bundle;
 import java.util.Arrays;
 import java.util.List;
 // Todo create a player class that will hold info about the player
+
 public class MainActivity extends AppCompatActivity {
     // Todo initialize these variables
     private RecyclerView recyclerView;
