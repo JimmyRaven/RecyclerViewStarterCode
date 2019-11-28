@@ -1,6 +1,8 @@
 package com.example.recyclerviewstudentversion;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +14,7 @@ import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 // Todo create a player class that will hold info about the player
 
@@ -21,6 +24,24 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     List<Player> list;
+
+    ItemTouchHelper swipe = new ItemTouchHelper(
+            new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
+                @Override
+                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                    final int fromPos = viewHolder.getAdapterPosition();
+                    final int toPos = target.getAdapterPosition();
+                    list.add(toPos, list.remove(fromPos));
+                    mAdapter.notifyItemMoved(fromPos, toPos);
+                    return true;
+                }
+
+                @Override
+                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+                }
+            }
+    );
 
     public MainActivity() {
     }
@@ -34,11 +55,11 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MyRecyclerAdapter(list);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
+        swipe.attachToRecyclerView(recyclerView);
 
     }
+
+
     //Todo create method that will fill list of players
     public ArrayList getPlayers() {
         ArrayList<Player> players = new ArrayList<Player>();

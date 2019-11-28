@@ -48,6 +48,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
 
     }
 
+
+
     @Override public int getItemCount() {
         return mPlayer.size();
     }
