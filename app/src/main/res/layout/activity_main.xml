@@ -2,7 +2,7 @@
 <!--  Todo add recycler view -->
 <!--  Todo add another xml file that will hold single_player_view -->
 <androidx.recyclerview.widget.RecyclerView
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:id="@+id/recyclerview"
     xmlns:android="http://schemas.android.com/apk/res/android" />
