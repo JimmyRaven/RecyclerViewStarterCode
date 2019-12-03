@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    final int fromPosi = viewHolder.getAdapterPosition();
+                    list.remove(fromPosi);
+                    mAdapter.notifyItemRemoved(fromPosi);
 
                 }
             }
