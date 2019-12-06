@@ -5,12 +5,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,13 +21,15 @@ import java.util.List;
 //onCreateViewHolder()
 //onBindViewHolder
 //getItemCount
-public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
+public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> implements Filterable {
 
     private List<Player> mPlayer;
+    private List<Player> exPlayer;
     Context context;
 
     public MyRecyclerAdapter(List<Player> mPlayer) {
         this.mPlayer = mPlayer;
+        exPlayer=new ArrayList<>(mPlayer);
     }
 
 
@@ -54,10 +59,32 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         return mPlayer.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return exFilter;
+    }
+    private Filter exFilter=new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<Player> filterList=new ArrayList<>();
+            if(charSequence==null||charSequence.length()==0)
+            {
+                filterList.addAll(exPlayer);
+            }
+            else
+            {
+                String pattern=charSequence.toString().toLowerCase().trim();
+            }
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+        }
+    };
 
 
-
-// Todo implement ViewHolder
+    // Todo implement ViewHolder
 public static class MyViewHolder extends RecyclerView.ViewHolder {
     // get references to each of the views in the single_item.xml
     // Todo implement constructor
@@ -73,5 +100,8 @@ public static class MyViewHolder extends RecyclerView.ViewHolder {
         pic = itemView.findViewById(R.id.image);
 
     }
+
 }
+
+
 }
