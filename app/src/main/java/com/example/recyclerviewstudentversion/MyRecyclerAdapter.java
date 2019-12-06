@@ -74,12 +74,25 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             else
             {
                 String pattern=charSequence.toString().toLowerCase().trim();
+
+                for(Player p:exPlayer)
+                {
+                    if(p.getName().toLowerCase().contains(pattern))
+                    {
+                        filterList.add(p);
+                    }
+                }
             }
+            FilterResults results=new FilterResults();
+            results.values=filterList;
+            return results;
         }
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-
+            mPlayer.clear();
+            mPlayer.addAll((List)filterResults.values);
+            notifyDataSetChanged();
         }
     };
 
