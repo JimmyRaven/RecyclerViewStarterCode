@@ -63,6 +63,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     public Filter getFilter() {
         return exFilter;
     }
+
     private Filter exFilter=new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
